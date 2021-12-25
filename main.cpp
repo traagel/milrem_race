@@ -61,6 +61,9 @@ int main()
     int target_x; // recalculated x value
     int target_y; // recalculated y value
 
+    // TO DO - read new inputs
+
+
     // game loop
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "EndlessLoop"
@@ -68,6 +71,8 @@ int main()
         last_x = x;
         last_y = y;
 
+
+        // TO DO - new loop inputs
         //get ship parameters
         std::cin >> x >> y >> next_checkpoint_x >> next_checkpoint_y >> next_checkpoint_dist >> next_checkpoint_angle;
         std::cin.ignore();
