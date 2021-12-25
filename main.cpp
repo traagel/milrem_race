@@ -102,8 +102,8 @@ int main()
         //adjust for drift, some constant * x / y speed in opposite direction
         vel_xy_vect = get_x_y_velocity(x, y, last_x, last_y);
         k = 2; //starting from 2
-        target_x = k*next_checkpoint_x; //- k*vel_xy_vect[0];
-        target_y = k*next_checkpoint_y; //- k*vel_xy_vect[1];
+        target_x = next_checkpoint_x - k*vel_xy_vect[0];
+        target_y = next_checkpoint_y - k*vel_xy_vect[1];
 
         // You have to output the target position
         // followed by the power (0 <= thrust <= 100)
