@@ -1,5 +1,5 @@
-# milrem_race
-milrem, coders-strike-back, bronze
+# milrem_race legend rank
+milrem, coders-strike-back, legend
 
 ### About:
 
