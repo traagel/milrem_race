@@ -39,6 +39,7 @@ int main()
 {
     // current and prev positions
     int x = 0, y = 0, last_x, last_y;
+    bool first_round = true;
 
     std::string thrust; // stores thrust string because "BOOST" is a string and reduces type casting
 
@@ -71,6 +72,13 @@ int main()
         std::cin >> x >> y >> next_checkpoint_x >> next_checkpoint_y >> next_checkpoint_dist >> next_checkpoint_angle;
         std::cin.ignore();
 
+        // first round x y fix ? need more elegant solution later ..
+        if (first_round){
+            last_x = x;
+            last_y = y;
+            first_round = false;
+        }
+
         //get enemy ship parameters
         std::cin >> opponent_x >> opponent_y;
         std::cin.ignore();
@@ -94,8 +102,8 @@ int main()
         //adjust for drift, some constant * x / y speed in opposite direction
         vel_xy_vect = get_x_y_velocity(x, y, last_x, last_y);
         k = 2; //starting from 2
-        target_x = next_checkpoint_x; //- k*vel_xy_vect[0];
-        target_y = next_checkpoint_y; //- k*vel_xy_vect[1];
+        target_x = k*next_checkpoint_x; //- k*vel_xy_vect[0];
+        target_y = k*next_checkpoint_y; //- k*vel_xy_vect[1];
 
         // You have to output the target position
         // followed by the power (0 <= thrust <= 100)
