@@ -1,5 +1,5 @@
-# milrem_race
-milrem, coders-strike-back, bronze
+# milrem_race - gold 
+milrem, coders-strike-back, bronze -> gold
 
 
 ### About:
@@ -89,7 +89,7 @@ Current logic pseudocode:
 Measure velocity (euclidean distance between two points) and acceleration (change in velocity), find either 0 for acc or max velocity
 
 
-#### Plan for drifting (edit: works! bronze -> silver)
+#### Plan for drifting (edit2: works! bronze -> silver -> gold!!)
 
 Add the negative x or y velocity vector to target, with some constant k (starting from 2)
 
