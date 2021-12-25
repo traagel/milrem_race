@@ -19,22 +19,6 @@ https://www.codingame.com/multiplayer/bot-programming/coders-strike-back
 
 	However, it has near-infinite possibilities of evolution as you can improve your artificial intelligence step by step, while sharpening your coding skills.
 
-### Rules:
-
-	The game is played on a map 16000 units wide and 9000 units high. The coordinate X=0, Y=0 is the top left pixel.
-
-	The checkpoints work as follows:
-
-		The checkpoints are circular, with a radius of 600 units.
-		The disposition of the checkpoints is selected randomly for each race.
-
-	The pods work as follows:
-
-		If none of your pods make it to their next checkpoint in under 100 turns, you are eliminated and lose the game.
-		The pods may move normally outside the game area.
-
-
-	Note: You may activate debug mode in the settings panel () to view additional game data.
 	
 ### Goals:
 
@@ -43,7 +27,7 @@ https://www.codingame.com/multiplayer/bot-programming/coders-strike-back
 	Document features/progress
 
 
-#### New rules
+#### Legend bracket rules
 
 The game is played on a map 16000 units wide and 9000 units high. The coordinate X=0, Y=0 is the top left pixel.
 
