@@ -1,4 +1,4 @@
-# milrem_race - gold 
+# milrem_race - bronze to gold 
 milrem, coders-strike-back, bronze -> gold
 
 
