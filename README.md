@@ -1,6 +1,7 @@
 # milrem_race
 milrem, coders-strike-back, bronze
 
+
 ### About:
 
 https://www.codingame.com/multiplayer/bot-programming/coders-strike-back
@@ -41,6 +42,13 @@ https://www.codingame.com/multiplayer/bot-programming/coders-strike-back
 	Achieve as high rank as possible
 	Use c++
 	Document features/progress
+	
+### Running updates:
+
+#### 12. 25. 2021 - Beat bronze! 
+Using drift calculations, successfully beat bronze league
+
+
 
 ### Bronze features/logic:
 
@@ -79,3 +87,10 @@ Current logic pseudocode:
 ![Alt text](doc/images/4_spd_acc_measure.png?raw=true "box for acc/speed")
 
 Measure velocity (euclidean distance between two points) and acceleration (change in velocity), find either 0 for acc or max velocity
+
+
+#### Plan for drifting (edit: works! bronze -> silver)
+
+Add the negative x or y velocity vector to target, with some constant k (starting from 2)
+
+![Alt text](doc/images/5_drift_adjustment.png?raw=true "box for acc/speed")
