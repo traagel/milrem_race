@@ -92,7 +92,7 @@ On each turn the pods movements are computed this way:
 ## TODO :
 #### Copy functions from previous branch
 	1) drift vector correction
-	2) acceleration
+	2) boost calculation
 	
 ## Progress :
 
