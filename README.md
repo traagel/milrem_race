@@ -93,7 +93,11 @@ On each turn the pods movements are computed this way:
 #### Copy functions from previous branch
 	1) drift vector correction
 	2) boost calculation
-	
+### Big problem! - need new angle calculation system
+#### Solution: 
+1) Calculate general angle between pod and target 
+![Alt text](doc/images/6_angle_cases.png?raw=true "angle calculation cases")
+2) Compare to general angle of pod given via input every round
 ## Progress :
 
 	Currently reading input and giving corret output
