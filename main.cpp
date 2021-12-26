@@ -4,131 +4,89 @@
 //#include <algorithm>
 #include <cmath>
 
-// Write an action using cout. DON'T FORGET THE "<< endl"
-// To debug: cerr << "Debug messages..." << endl;
+int main() {
+    // Initialization input
+    // Line 1: laps : the number of laps to complete the race.
+    // Line 2: checkpointCount : the number of checkpoints in the circuit.
+    int laps;
+    int current_lap;
+    int checkpoint_count;
+    int checkpoint_id_one;
+    int checkpoint_id_two;
+    // coordinates of the checkpoints
+    std::vector<std::vector<int>> checkpoints;
 
-double euclidean_distance(int x, int y, int next_checkpoint_x, int next_checkpoint_y){
-    double dist;
-    int delta_x = next_checkpoint_x-x;
-    int delta_y = next_checkpoint_y-y;
-    dist = sqrt(delta_x*delta_x + delta_y*delta_y);
-    return dist;
-}
+    /*
+     * Input for one game turn
+     * First 2 lines: Your two pods.
+     * Next 2 lines: The opponent's pods.
+     * Each pod is represented by: 6 integers,
+         * x & y for the position.
+         * vx & vy for the speed vector.
+         * angle for the rotation angle in degrees.
+         * nextCheckPointId for the number of the next checkpoint the pod must go through.
+    */
+    // Declaring my pods my_pod_one, my_pod_two, enemy pods as: enemy_pod_one, enemy_pod_two;
+    std::vector<int> my_pod_one;
+    std::vector<int> my_pod_two;
+    std::vector<int> enemy_pod_one;
+    std::vector<int> enemy_pod_two;
+    // Vector of pods
+    std::vector<std::vector<int>> pods = {my_pod_one, my_pod_two, enemy_pod_one, enemy_pod_two};
 
-bool angle_cone(int next_checkpoint_angle, int angle){
-    if(next_checkpoint_angle > angle or next_checkpoint_angle < -angle){
-        return true;
-    } else {
-        return false;
+    // temp variables
+    int i; // used for loops
+    int cin_input; // pod loop
+    std::vector<int> coordinates; // temp vector for inserting coordinates into coordinate vector
+
+    // initialization input: laps, checkpoint_count, checkpoint coordinates
+    std::cin >> laps >> checkpoint_count;
+    i = 0;
+    std::cerr << "laps: " << laps << ", checkpoint_count: " << checkpoint_count << std::endl;
+
+    while (i < checkpoint_count){
+        for (int j = 0; j < 2; j++){
+            std::cin >> cin_input;
+            coordinates.push_back(cin_input);
+            std::cerr << "read coordinate: " << cin_input << std::endl;
+        }
+        std::cin.ignore();
+        checkpoints.push_back(coordinates);
+        coordinates.clear();
+        i++;
     }
-}
+    // initialize pod vectors
+    for (std::vector<int>& pod: pods){
+        i = 0;
+        while (i < 6) {
+            pod.push_back(0);
+            i++;
+        }
+    }
 
-std::vector<int> get_x_y_velocity(int x, int y, int last_x, int last_y){
-    int vel_x = x - last_x;
-    int vel_y = y - last_y;
-    std::vector <int> speed_vector = {vel_x, vel_y};
-    return speed_vector;
-}
-
-float get_acceleration(float spd, float spd_old){
-    float acc = spd - spd_old;
-    return acc;
-}
-
-int main()
-{
-    // current and prev positions
-    int x = 0, y = 0, last_x, last_y;
-    bool first_round = true;
-
-    std::string thrust; // stores thrust string because "BOOST" is a string and reduces type casting
-
-    // checkpoint
-    int next_checkpoint_x, next_checkpoint_y, next_checkpoint_dist, next_checkpoint_angle;
-    // angle between your pod orientation and the direction of the next checkpoint
-
-    // opponent info
-    int opponent_x;
-    int opponent_y;
-
-    // derived stuff
-    int boosts_left = 1;
-    double checkpoint_distance;
-    double velocity;
-
-    int k; // drift adjustment constant k
-    std::vector<int> vel_xy_vect;
-    int target_x; // recalculated x value
-    int target_y; // recalculated y value
-
-    // TO DO - read new inputs
-
-
-    // game loop
+    // Game loop
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "EndlessLoop"
     while (1) {
-        last_x = x;
-        last_y = y;
-
-
-        // TO DO - new loop inputs
-        //get ship parameters
-        std::cin >> x >> y >> next_checkpoint_x >> next_checkpoint_y >> next_checkpoint_dist >> next_checkpoint_angle;
-        std::cin.ignore();
-
-        // first round x y fix ? need more elegant solution later ..
-        if (first_round){
-            last_x = x;
-            last_y = y;
-            first_round = false;
+        // updating pod vectors - 6 input integers
+        for (std::vector<int>& pod: pods) { // loop through every pod in pods
+            i = 0;
+            while (i < 6) { // i goes 0 to 5 because 6 integer variables get pushed into every vector
+                std::cin >> cin_input;
+                pod[i] = cin_input; // something wrong with this line
+                i++;
+            }
+            std::cin.ignore();
         }
 
-        //get enemy ship parameters
-        std::cin >> opponent_x >> opponent_y;
-        std::cin.ignore();
-
-        checkpoint_distance = euclidean_distance(x, y, next_checkpoint_x, next_checkpoint_y);
-        velocity = euclidean_distance(x,y,last_x,last_y);
-
-        // calculate thrust
-        if (angle_cone(next_checkpoint_angle, 90)){
-            thrust = "15";
-        } else if (boosts_left > 0 and checkpoint_distance > 7000 and not angle_cone(next_checkpoint_angle, 15)){
-            std::cerr << "distance: " << checkpoint_distance << ", using boost" << std::endl;
-            thrust = "BOOST";
-            boosts_left = 0;
-        } else if(checkpoint_distance > 2500) {
-            thrust = "100";
-        } else {
-            thrust = "45";
-        }
-
-        //adjust for drift, some constant * x / y speed in opposite direction
-        vel_xy_vect = get_x_y_velocity(x, y, last_x, last_y);
-        k = 2; //starting from 2
-        target_x = next_checkpoint_x - k*vel_xy_vect[0];
-        target_y = next_checkpoint_y - k*vel_xy_vect[1];
-
-        // You have to output the target position
-        // followed by the power (0 <= thrust <= 100)
-        // i.e.: "x y thrust"
-        std::cerr << "calc dist: " << checkpoint_distance << std::endl;
-        std::cerr << "input dist: " << next_checkpoint_dist << std::endl;
-        std::cerr << "speed: " << velocity <<  std::endl;
-        std::cerr << "checkpoint x: " << next_checkpoint_x << ", y:" << next_checkpoint_y << std::endl;
-        std::cerr << "adjusted x: " << target_x << ", y:" << target_y << std::endl;
-        // x, y, last_x, last_y
-        std::cerr << "x:" << x << std::endl;
-        std::cerr << "y:" << y << std::endl;
-        std::cerr << "last_x:" << last_x << std::endl;
-        std::cerr << "last_y:" << last_y << std::endl;
-
-        //
-        std::cerr << "vel x: " << vel_xy_vect[0] << std::endl;
-        std::cerr << "vel y: " << vel_xy_vect[1] << std::endl;
-        std::cout << target_x << " " << target_y << " " << thrust << std::endl;
+        // outputs
+        checkpoint_id_one = pods[0][5];
+        checkpoint_id_two = pods[1][5];
+        // my pod 1
+        std::cout << checkpoints[checkpoint_id_one][0] << " " << checkpoints[checkpoint_id_one][1] << " 100" << std::endl;
+        // my pod 2
+        std::cout << checkpoints[checkpoint_id_two][0] << " " << checkpoints[checkpoint_id_two][1] << " 100" << std::endl;
 
     }
-#pragma clang diagnostic pop
+// #pragma clang diagnostic pop
 }
