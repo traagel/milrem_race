@@ -89,3 +89,11 @@ On each turn the pods movements are computed this way:
 	Response time first turn ≤ 1000ms
 	Response time per turn ≤ 75ms
 
+## TODO :
+#### Copy functions from previous branch
+	1) drift vector correction
+	2) acceleration
+	
+## Progress :
+
+	Currently reading input and giving corret output
